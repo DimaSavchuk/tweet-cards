@@ -1,15 +1,12 @@
 body {
-  background-color: #000;
-  background-image: url('./assets/background.png');
-  background-size: auto 100%;
-  background-position: center center;
-  background-repeat: no-repeat;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   font-style: normal;
   color: #111111;
   width: 100%;
-  height: 100vh;
+  height: auto;
+
+  background: linear-gradient(115deg, #feebc8, #b794f4);
 }
 h1,
 h2,
