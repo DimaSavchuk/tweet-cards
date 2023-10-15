@@ -1,16 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { API_ENDPOINT, BASE_URL } from '../../helpers/const';
 
-axios.defaults.baseURL = 'https://6529286f55b137ddc83e4b04.mockapi.io/api';
+axios.defaults.baseURL = BASE_URL;
 
-export const getUsers = createAsyncThunk(
-  'users/getUsers',
+export const getAllUsers = createAsyncThunk(
+  'users/getAllUsers',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get('/users');
+      const response = await axios.get(API_ENDPOINT);
+
       return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+    } catch (e) {
+      console.error(e);
+      return thunkAPI.rejectWithValue(e.message);
     }
   },
 );

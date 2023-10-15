@@ -1,6 +1,7 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import usersReducer from './users/usersSlice.js';
-import followingStatusReducer from './followingStatus/followingStatusSlice.js';
+import followingStatusReducer from './following/followingSlice.js';
+import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import {
   FLUSH,
@@ -9,8 +10,6 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-  persistReducer,
-  persistStore,
 } from 'redux-persist';
 
 const persistConfig = {
@@ -18,13 +17,11 @@ const persistConfig = {
   storage,
 };
 
-const rootReduser = combineReducers({
-  users: usersReducer,
-  followingStatus: persistReducer(persistConfig, followingStatusReducer),
-});
-
 export const store = configureStore({
-  reducer: rootReduser,
+  reducer: {
+    users: usersReducer,
+    followingStatus: persistReducer(persistConfig, followingStatusReducer),
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

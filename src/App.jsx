@@ -1,23 +1,16 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { AppWrapper } from './App.styled';
-import { ROUTES } from './Routers/Routes';
-import { lazy } from 'react';
-
-const HomePage = lazy(() => import('./pages/HomePages/HomePage'));
-const TweetsPage = lazy(() => import('./pages/TweetsPage/TweetsPage'));
-
+import TweetsPage from './page/TweetsPage/TweetsPage';
+import HomePage from './page/HomePage/HomePage';
 function App() {
   return (
-    <AppWrapper>
+    <>
       <Routes>
-        <Route path={ROUTES.HOME} element={<HomePage />} />
-        <Route path={ROUTES.TWEETS} element={<TweetsPage />} />
-        <Route
-          path={ROUTES.ERROR}
-          element={<Navigate to={ROUTES.HOME} replace />}
-        />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/tweets" element={<TweetsPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </AppWrapper>
+    </>
   );
 }
+
 export default App;

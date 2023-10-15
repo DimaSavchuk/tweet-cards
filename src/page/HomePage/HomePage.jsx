@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../../Routers/Routes';
 import { Container } from './HomePageStyled';
-import { StyledButton } from '../TweetsPage/TweetsPageStyled';
+import { StyledButton } from '../../components/StyledButton/StyledButton.styled';
 
 const HomePage = () => {
   return (
     <Container>
       <h1 style={{ color: 'white' }}>Home page</h1>
-      <Link to={ROUTES.TWEETS}>
+      <Link to="/tweets">
         <StyledButton>To Tweets</StyledButton>
       </Link>
     </Container>

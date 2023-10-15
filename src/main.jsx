@@ -1,17 +1,22 @@
-import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import { store, persistor } from './redux/store';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
-import './index.css';
-import { persistor, store } from './redux/store.js';
 import { PersistGate } from 'redux-persist/integration/react';
+import { BrowserRouter } from 'react-router-dom';
+import './main.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loader from './components/Loader/Loader';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const root = createRoot(document.getElementById('root'));
+root.render(
   <Provider store={store}>
-    {/* <PersistGate loading={null} persistor={persistor}> */}
-    <BrowserRouter basename="/tweet-cards">
-      <App />
-    </BrowserRouter>
-    {/* </PersistGate> */}
+    <PersistGate loading={<Loader />} persistor={persistor}>
+      <BrowserRouter basename="/tweet-cards">
+        <App />
+        <ToastContainer />
+      </BrowserRouter>
+    </PersistGate>
   </Provider>,
 );

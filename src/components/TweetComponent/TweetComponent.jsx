@@ -7,21 +7,28 @@ import {
   InfoWrapper,
   Tweet,
   Info,
-  StyledButton,
   InfoList,
 } from './TweetComponent.styled';
+import { StyledButton } from '../StyledButton/StyledButton.styled';
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import BG_IMG from '../../assets/images/CardBgImg.png';
 import { useState } from 'react';
 
 const TweetComponent = ({ userData, isFollowing, followUpdate }) => {
-  const { id, user, tweets, followers, avatar } = userData ?? {};
+  const { id, tweets, followers, avatar } = userData ?? {};
 
   const [isFollowed, setIsFollowed] = useState(isFollowing);
 
   const onFollow = () => {
     setIsFollowed(!isFollowed);
     followUpdate(id, !isFollowed);
+    toast.info(isFollowed ? 'Unfollowed' : 'Followed', {
+      position: 'top-right',
+      autoClose: 1000,
+    });
   };
 
   return (

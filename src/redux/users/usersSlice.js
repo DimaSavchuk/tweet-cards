@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getAllUsers } from './usersOperations';
 import { handleFulfilled, handlePending, handleRejected } from './constants';
-import { getUsers } from './usersOperations';
 
 const initialState = {
   users: [],
@@ -13,9 +13,9 @@ export const usersSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(getUsers.pending, handlePending)
-      .addCase(getUsers.fulfilled, handleFulfilled)
-      .addCase(getUsers.rejected, handleRejected);
+      .addCase(getAllUsers.pending, handlePending)
+      .addCase(getAllUsers.fulfilled, handleFulfilled)
+      .addCase(getAllUsers.rejected, handleRejected);
   },
 });
 
