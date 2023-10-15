@@ -3,10 +3,8 @@ body {
   font-weight: 400;
   font-style: normal;
   color: #111111;
-  width: 100%;
-  height: auto;
 
-  background: linear-gradient(115deg, #feebc8, #b794f4);
+  background: #b794f4;
 }
 h1,
 h2,

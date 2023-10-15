@@ -5,6 +5,12 @@ export const CommonContainer = styled.div`
   padding-left: 20px;
   padding-right: 20px;
 
+  display: flex;
+  flex-direction: column;
+
+  gap: 50px;
+  align-items: center;
+
   @media (min-width: 375px) {
     max-width: 375px;
     margin: 0 auto;

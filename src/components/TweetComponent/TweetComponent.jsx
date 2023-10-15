@@ -12,32 +12,17 @@ import {
 } from './TweetComponent.styled';
 
 import BG_IMG from '../../assets/images/CardBgImg.png';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-const TweetComponent = ({ userData }) => {
+const TweetComponent = ({ userData, isFollowing, followUpdate }) => {
   const { id, user, tweets, followers, avatar } = userData ?? {};
 
-  const [isFollowing, setIsFollowing] = useState(false);
-  const [followersCount, setFollowersCount] = useState(followers);
+  const [isFollowed, setIsFollowed] = useState(isFollowing);
 
-  let formattedFollowers = followers.toLocaleString('en-US');
-
-  const toggleFollow = () => {
-    if (isFollowing) {
-      setFollowersCount(followersCount - 1);
-    } else {
-      setFollowersCount(followersCount + 1);
-    }
-    setIsFollowing(!isFollowing);
+  const onFollow = () => {
+    setIsFollowed(!isFollowed);
+    followUpdate(id, !isFollowed);
   };
-
-  useEffect(() => {
-    const formatted = followersCount.toLocaleString('en-US');
-
-    if (formatted !== formattedFollowers) {
-      formattedFollowers = formatted;
-    }
-  }, [followersCount]);
 
   return (
     <Tweet key={id}>
@@ -54,11 +39,18 @@ const TweetComponent = ({ userData }) => {
       <InfoWrapper>
         <InfoList>
           <Info>{`${tweets} tweets`}</Info>
-          <Info>{`${formattedFollowers} followers`}</Info>
+          <Info>{`${
+            isFollowed
+              ? (followers + 1).toLocaleString('es-US')
+              : followers.toLocaleString('es-US')
+          } followers`}</Info>
         </InfoList>
 
-        <StyledButton onClick={toggleFollow}>
-          {isFollowing ? 'Unfollow' : 'Follow'}
+        <StyledButton
+          onClick={onFollow}
+          style={{ backgroundColor: isFollowed ? '#5CD3A8' : '#EBD8FF' }}
+        >
+          {isFollowed ? 'Unfollow' : 'Follow'}
         </StyledButton>
       </InfoWrapper>
     </Tweet>
